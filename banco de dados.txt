@@ -1,0 +1,17 @@
+
+DROP TABLE IF EXISTS produtos;
+create table produtos (
+id serial primary key,
+descricao varchar(100),
+preco float not null,
+marca varchar(50) not null,
+validade date 
+);
+drop table if exists municipios;
+create table municipios(
+nome varchar(100) not null,
+estado varchar(50) not null,
+pais varchar (50) not null
+	
+
+);
