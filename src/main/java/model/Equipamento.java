@@ -8,27 +8,18 @@ package model;
  *
  * @author Victor
  */
-public class Item {
+public class Equipamento {
 
-    public Item(int identificador, String descricao, double preco) {
+    public Equipamento(int identificador, String descricao) {
         this.identificador = identificador;
         this.descricao = descricao;
-        this.preco = preco;
-
     }
 
-    public Item(String descricao, double preco) {
-
-        this.descricao = descricao;
-        this.preco = preco;
+    public Equipamento() {
     }
-
-    public Item() {
-    }
-
-    protected int identificador;
-    protected String descricao;
-    protected double preco;
+    
+    private int identificador;
+    private String descricao;
 
     public int getIdentificador() {
         return identificador;
@@ -45,13 +36,5 @@ public class Item {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
+    
 }

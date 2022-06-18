@@ -10,6 +10,11 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.24</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE130</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,4 +22,19 @@
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>com.mycompany.progvisualhotel.ProgVisualHotel</exec.mainClass>
     </properties>
+    
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>/*.java</include>
+                    <include>recursos/*.png</include>
+
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
 </project>

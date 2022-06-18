@@ -35,7 +35,7 @@ public class ProdutoDAO {
         ps = conn.prepareStatement(sql);
 
         ps.setString(1, prod.getDescricao());
-        ps.setFloat(2, prod.getPreco());
+        ps.setDouble(2, prod.getPreco());
         ps.setString(3, prod.getMarca());
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
@@ -57,7 +57,7 @@ public class ProdutoDAO {
         ps = conn.prepareStatement(sql);
 
         ps.setString(1, prod.getDescricao());
-        ps.setFloat(2, prod.getPreco());
+        ps.setDouble(2, prod.getPreco());
         ps.setString(3, prod.getMarca());
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
@@ -101,7 +101,7 @@ public class ProdutoDAO {
             prod.setIdentificador(rs.getInt("id"));
             prod.setDescricao(rs.getString("descricao"));
             prod.setMarca(rs.getString("marca"));
-            prod.setPreco(rs.getFloat("preco"));
+            prod.setPreco(rs.getDouble("preco"));
 
             LocalDate ld = rs.getDate("validade").toLocalDate();
             prod.setValidade(ld);
@@ -130,7 +130,7 @@ public class ProdutoDAO {
             prod.setIdentificador(rs.getInt("id"));
             prod.setDescricao(rs.getString("descricao"));
             prod.setMarca(rs.getString("marca"));
-            prod.setPreco(rs.getFloat("preco"));
+            prod.setPreco(rs.getDouble("preco"));
 
             LocalDate ld = rs.getDate("validade").toLocalDate();
             prod.setValidade(ld);
