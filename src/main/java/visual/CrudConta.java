@@ -56,7 +56,7 @@ public class CrudConta extends javax.swing.JFrame {
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 60, 80));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 40, 40));
 
-        jButtonPendente.setText("Mostar Pendentes");
+        jButtonPendente.setText("Mostrar Pendentes");
         jButtonPendente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPendenteActionPerformed(evt);
@@ -64,7 +64,7 @@ public class CrudConta extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonPendente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
 
-        jButtonTodos.setText("Mostar Todos");
+        jButtonTodos.setText("Mostrar Todos");
         jButtonTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTodosActionPerformed(evt);

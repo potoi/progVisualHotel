@@ -5,6 +5,7 @@
 package visual;
 
 import dao.ProdutoDAO;
+
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,35 +19,17 @@ import recursos.ImagemFichario;
  *
  * @author Victor
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaPrincipal1 extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPrincipal
      */
-    private static TelaPrincipal instance;
 
-    private TelaPrincipal(String nome) {
-        initComponents();
-        jLabel1.setText(nome);
-    }
-
-    private TelaPrincipal() {
+    public TelaPrincipal1() {
         initComponents();
     }
 
-    public static TelaPrincipal voltarTelaPrincipal(String nome) {
-        if (instance == null) {
-            instance = new TelaPrincipal(nome);
-        }
-        return instance;
-    }
-
-    public static TelaPrincipal voltarTelaPrincipal() {
-        if (instance == null) {
-            instance = new TelaPrincipal();
-        }
-        return instance;
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -210,9 +193,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             crud = new CrudProduto();
             crud.setVisible(true);
         } catch (Exception ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaPrincipal1.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -228,6 +210,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaPrincipal1().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

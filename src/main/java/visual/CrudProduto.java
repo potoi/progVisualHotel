@@ -5,9 +5,11 @@
 package visual;
 
 import controller.FicharioProduto;
+import java.awt.Color;
 import model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DropMode;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
@@ -52,9 +54,13 @@ public class CrudProduto extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable.setModel(dtm);
+        jTable.setDragEnabled(true);
+        jTable.setGridColor(new java.awt.Color(204, 255, 255));
+        jTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        jTable.setShowGrid(true);
         jScrollPane2.setViewportView(jTable);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 400, 240));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 620, 240));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 60, 80));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 40, 40));
 
@@ -89,34 +95,30 @@ public class CrudProduto extends javax.swing.JFrame {
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         AddProduto tela = new AddProduto(this, true);
         Produto produto = tela.showDialog();
-        try {
-            ficharioAtual.add(produto);
-            ImagemFichario imagem = new ImagemFichario();
-              JOptionPane.showMessageDialog(null, "O dado foi gravado corretamente.",
-                    "Sucesso", JOptionPane.ERROR_MESSAGE, imagem.sucesso());
-            atualizaTabela();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
-                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
-        }
+        atualizaTabela();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonAlterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterActionPerformed
+        if (jTable.getSelectedRow() > -1) {
+            try {
+                int id = Integer.parseInt(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
+                Produto produtoantes = ficharioAtual.achar(id);
 
-        try {
-            int id = Integer.parseInt(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
-            Produto produtoantes = ficharioAtual.achar(id);
-            AddProduto tela = new AddProduto(this, true, produtoantes);
-            Produto produtodps = tela.showDialog();
-            ficharioAtual.alterar(produtodps, id);
-            ImagemFichario imagem = new ImagemFichario();
-            JOptionPane.showMessageDialog(null, "O dado foi gravado corretamente.",
-                    "Sucesso", JOptionPane.ERROR_MESSAGE, imagem.sucesso());
-            atualizaTabela();
+                AddProduto tela = new AddProduto(this, true, produtoantes);
+                Produto produtodps = tela.showDialog();
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
-                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                if (produtodps != null) {
+                    ficharioAtual.alterar(produtodps, id);
+                    ImagemFichario imagem = new ImagemFichario();
+                    JOptionPane.showMessageDialog(null, "O dado foi gravado corretamente.",
+                            "Sucesso", JOptionPane.ERROR_MESSAGE, imagem.sucesso());
+                    atualizaTabela();
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
+                        + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButtonAlterActionPerformed
 

@@ -92,7 +92,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonPendente">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mostar Pendentes"/>
+        <Property name="text" type="java.lang.String" value="Mostrar Pendentes"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPendenteActionPerformed"/>
@@ -105,7 +105,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonTodos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mostar Todos"/>
+        <Property name="text" type="java.lang.String" value="Mostrar Todos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTodosActionPerformed"/>

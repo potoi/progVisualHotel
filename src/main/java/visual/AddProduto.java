@@ -4,12 +4,19 @@
  */
 package visual;
 
+import controller.FicharioProduto;
+import dao.ProdutoDAO;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import model.Produto;
+import recursos.ImagemFichario;
 
 /**
  *
@@ -26,7 +33,7 @@ public class AddProduto extends javax.swing.JDialog {
         this.setTitle("Cadastro de Produto");
         initComponents();
         formatarCampo();
-        produto = new Produto();
+
     }
 
     public AddProduto(java.awt.Frame parent, boolean modal, Produto produto) {
@@ -34,7 +41,6 @@ public class AddProduto extends javax.swing.JDialog {
         this.setTitle("Cadastro de Produto");
         initComponents();
         formatarCampo();
-        this.produto = produto;
         preencher(produto);
 
     }
@@ -48,7 +54,6 @@ public class AddProduto extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonVoltar = new javax.swing.JButton();
         jButtonGravar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jFTId = new javax.swing.JFormattedTextField();
@@ -63,18 +68,15 @@ public class AddProduto extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonVoltar.setText("<<<");
-        jButtonVoltar.setFocusable(false);
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltarActionPerformed(evt);
-            }
-        });
-
         jButtonGravar.setText("Gravar");
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGravarActionPerformed(evt);
+            }
+        });
+        jButtonGravar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonGravarKeyPressed(evt);
             }
         });
 
@@ -114,6 +116,11 @@ public class AddProduto extends javax.swing.JDialog {
 
         jLabel7.setText("Validade:");
 
+        jFTValidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTValidadeFocusGained(evt);
+            }
+        });
         jFTValidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jFTValidadeKeyReleased(evt);
@@ -127,9 +134,6 @@ public class AddProduto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButtonVoltar)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -149,14 +153,12 @@ public class AddProduto extends javax.swing.JDialog {
                             .addComponent(jFTPreco)
                             .addComponent(jFTMarca)
                             .addComponent(jFTValidade))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jFTId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,45 +180,15 @@ public class AddProduto extends javax.swing.JDialog {
                     .addComponent(jFTValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
-
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-        try {
-            Produto prod = new Produto();
-            if (!jFTId.getText().isEmpty()) {
-                prod.setIdentificador(Integer.parseInt(jFTId.getText()));
-            }
-            prod.setDescricao(jFTDescricao.getText());
-            String preco = jFTPreco.getText().replaceAll(",", ".");
-            prod.setPreco(Double.parseDouble(preco));
-            prod.setMarca(jFTMarca.getText());
-            int dia, mes, ano, index;
-            String texto = jFTValidade.getText();
-            index = texto.indexOf("/");
-            dia = Integer.parseInt(texto.substring(0, index));
-            texto = texto.substring(index + 1);
-            index = texto.indexOf("/");
-            mes = Integer.parseInt(texto.substring(0, index));
-            texto = texto.substring(index + 1);
-            ano = Integer.parseInt(texto);
-            LocalDate date = LocalDate.of(ano, mes, dia);
-            prod.setValidade(date);
-            produto = prod;
-            this.dispose();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
-                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
-        }
+        grava();
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jFTPrecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTPrecoKeyTyped
@@ -275,10 +247,65 @@ public class AddProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jFTValidadeKeyReleased
 
+    private void jButtonGravarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonGravarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            grava();
+        }
+    }//GEN-LAST:event_jButtonGravarKeyPressed
+
+    private void jFTValidadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTValidadeFocusGained
+       jFTValidade.setCaretPosition(0);
+    }//GEN-LAST:event_jFTValidadeFocusGained
+    private void grava() {
+        try {
+            Produto prod = new Produto();
+            if (!jFTId.getText().isEmpty()) {
+                prod.setIdentificador(Integer.parseInt(jFTId.getText()));
+            }
+            prod.setDescricao(jFTDescricao.getText());
+            String preco = jFTPreco.getText().replaceAll(",", ".");
+            prod.setPreco(Double.parseDouble(preco));
+            prod.setMarca(jFTMarca.getText());
+            int dia, mes, ano, index;
+            String texto = jFTValidade.getText();
+            index = texto.indexOf("/");
+            dia = Integer.parseInt(texto.substring(0, index));
+            texto = texto.substring(index + 1);
+            index = texto.indexOf("/");
+            mes = Integer.parseInt(texto.substring(0, index));
+            texto = texto.substring(index + 1);
+            ano = Integer.parseInt(texto);
+            LocalDate date = LocalDate.of(ano, mes, dia);
+            prod.setValidade(date);
+            produto = prod;
+
+            if (jFTId.getText().length() > 0) {
+                this.dispose();
+            } else {
+                gravaBD();
+                int input = JOptionPane.showConfirmDialog(null, "Registrar outro?","Escolha",JOptionPane.OK_OPTION);
+                if (input != 0) {
+                    this.dispose();
+                } else {
+                    Container con = this.getContentPane();
+                    for (Component c : con.getComponents()) {
+                        if (c instanceof JTextField) {
+                            JTextField j = (JTextField) c;
+                            j.setText("");
+                        }
+                    }
+                    jFTValidade.setText("__/__/____");
+                }
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
+                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGravar;
-    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JFormattedTextField jFTDescricao;
     private javax.swing.JFormattedTextField jFTId;
     private javax.swing.JFormattedTextField jFTMarca;
@@ -319,6 +346,21 @@ public class AddProduto extends javax.swing.JDialog {
         String diaFormat = String.format("%02d", dia);
         String mesFormat = String.format("%02d", mes);
         jFTValidade.setText(diaFormat + "/" + mesFormat + "/" + ano);
+    }
+
+    private void gravaBD() {
+        if (produto != null) {
+            try {
+                FicharioProduto fichario = new FicharioProduto();
+                fichario.add(produto);
+                ImagemFichario imagem = new ImagemFichario();
+                JOptionPane.showMessageDialog(null, "O dado foi gravado corretamente.",
+                        "Sucesso", JOptionPane.ERROR_MESSAGE, imagem.sucesso());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
+                        + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }
 
 }

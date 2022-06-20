@@ -102,65 +102,6 @@ foreign key (idServico) references servicos(id),
 foreign key (matricula) references funcionarios(matricula)
 );
 
-drop table if exists contas;
-create table contas(
-id serial primary key,	
-dataAbertura date not null,
-dataFechamento date,
-total float,
-idClienteFisico int,
-idClienteJuridico int,
-quarto int not null,
-preco float not null,
-foreign key (idClienteFisico) references clientesFisico(id),
-foreign key (idClienteJuridico) references clientesJuridico(id)
-
-);
-
-drop table if exists conta_produto;
-create table conta_produto(
-idConta int ,	
-idProduto int,
-foreign key (idConta) references contas(id),
-foreign key (idProduto) references produtos(id)
-);
-
-drop table if exists conta_servico;
-create table conta_servico(
-idConta int ,	
-idServico int,
-foreign key (idConta) references contas(id),
-foreign key (idServico) references servicos(id)
-);
-
-drop table if exists faturas;
-create table faturas(
-idConta int not null primary key,	
-dataLiquidacao date not null,
-qtdParcelas int not null,
-tipoPagamento int not null,
-foreign key (idConta) references contas(id)
-
-);
-
-drop table if exists parcelas;
-create table parcelas(
-id serial primary key,
-idConta int not null,
-dataVencimento date not null,
-dataPagamento date ,
-valor float,
-juroMoraAplicado float,
-valorFinal float,
-foreign key (idConta) references contas(id)
-
-);
-
-drop table if exists usuarios;
-create table usuarios(
-nome varchar(40) primary key not null,
-senha varchar(64) not null
-);
 
 
 

@@ -39,7 +39,7 @@ public  class ImagemFichario {
         }
     }
     public  ImageIcon sucesso(){
-        ImageIcon icon = createImageIcon("sucesso.png", 70);
+        ImageIcon icon = createImageIcon("sucesso.png", 60);
         return icon;
     }
 }
