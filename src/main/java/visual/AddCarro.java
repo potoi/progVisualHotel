@@ -4,25 +4,19 @@
  */
 package visual;
 
-import java.awt.Frame;
-import java.text.DateFormat;
+import controller.FicharioVeiculo;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.InputVerifier;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-
-import model.Item;
-import model.Produto;
+import model.Veiculo;
+import recursos.ImagemFichario;
 
 /**
  *
@@ -30,14 +24,24 @@ import model.Produto;
  */
 public class AddCarro extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CrudAlterConta
-     */
-    public AddCarro() {
+    private Color cor;
+    private Veiculo veiculo;
+    private int check = 0;
 
+    public AddCarro(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         this.setTitle("Cadastro de Carro");
         initComponents();
         formatarCampo();
+    }
+
+    public AddCarro(java.awt.Frame parent, boolean modal, Veiculo veiculo) {
+        super(parent, modal);
+        this.setTitle("Alterar Carro");
+        this.veiculo = veiculo;
+        initComponents();
+        formatarCampo();
+        preencher(veiculo);
     }
 
     /**
@@ -49,28 +53,19 @@ public class AddCarro extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonVoltar = new javax.swing.JButton();
         jButtonGravar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jFTDataA = new javax.swing.JFormattedTextField();
+        jFTMarca = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
-        jFTDataA1 = new javax.swing.JFormattedTextField();
+        jFTModelo = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        jFTDataA2 = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jFTDataA3 = new javax.swing.JFormattedTextField();
+        jFTPlaca = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        jFTDataA4 = new javax.swing.JFormattedTextField();
+        jFTVaga = new javax.swing.JFormattedTextField();
+        jFTCor = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jButtonVoltar.setText("<<<");
-        jButtonVoltar.setFocusable(false);
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltarActionPerformed(evt);
-            }
-        });
 
         jButtonGravar.setText("Gravar");
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,116 +76,18 @@ public class AddCarro extends javax.swing.JDialog {
 
         jLabel2.setText("Marca:");
 
-        jFTDataA.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jFTDataAFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFTDataAFocusLost(evt);
-            }
-        });
-        jFTDataA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTDataAActionPerformed(evt);
-            }
-        });
-        jFTDataA.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jFTDataAKeyReleased(evt);
-            }
-        });
-
         jLabel3.setText("Modelo:");
-
-        jFTDataA1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jFTDataA1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFTDataA1FocusLost(evt);
-            }
-        });
-        jFTDataA1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTDataA1ActionPerformed(evt);
-            }
-        });
-        jFTDataA1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jFTDataA1KeyReleased(evt);
-            }
-        });
 
         jLabel5.setText("Cor:");
 
-        jFTDataA2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jFTDataA2FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFTDataA2FocusLost(evt);
-            }
-        });
-        jFTDataA2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTDataA2ActionPerformed(evt);
-            }
-        });
-        jFTDataA2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jFTDataA2KeyReleased(evt);
-            }
-        });
-
         jLabel6.setText("Placa:");
 
-        jFTDataA3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jFTDataA3FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFTDataA3FocusLost(evt);
-            }
-        });
-        jFTDataA3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTDataA3ActionPerformed(evt);
-            }
-        });
-        jFTDataA3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jFTDataA3KeyReleased(evt);
-            }
-        });
-
         jLabel7.setText("Vaga:");
-
-        jFTDataA4.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jFTDataA4FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFTDataA4FocusLost(evt);
-            }
-        });
-        jFTDataA4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTDataA4ActionPerformed(evt);
-            }
-        });
-        jFTDataA4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jFTDataA4KeyReleased(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButtonVoltar)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -205,38 +102,36 @@ public class AddCarro extends javax.swing.JDialog {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFTDataA, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                            .addComponent(jFTDataA1)
-                            .addComponent(jFTDataA2)
-                            .addComponent(jFTDataA3)
-                            .addComponent(jFTDataA4))))
-                .addContainerGap(59, Short.MAX_VALUE))
+                            .addComponent(jFTMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                            .addComponent(jFTModelo)
+                            .addComponent(jFTPlaca)
+                            .addComponent(jFTVaga)
+                            .addComponent(jFTCor))))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jFTDataA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jFTDataA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jFTDataA2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFTDataA3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jFTDataA4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -246,103 +141,36 @@ public class AddCarro extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
-
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
+        Veiculo veiculo = new Veiculo();
+        try {
+            this.veiculo = veiculo;
+            veiculo.setMarca(jFTMarca.getText());
+            veiculo.setModelo(jFTModelo.getText());
+            veiculo.setColor(jFTCor.getText());
+            veiculo.setPlaca(jFTPlaca.getText());
+            veiculo.setVagaOcupada(jFTVaga.getText());
+            if (this.veiculo != null) {
+                veiculo.setId(this.veiculo.getId());
+            }
+            this.veiculo = veiculo;
+            check = 1;
+            this.dispose();
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
+                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonGravarActionPerformed
-
-    private void jFTDataAFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataAFocusGained
-
-    }//GEN-LAST:event_jFTDataAFocusGained
-
-    private void jFTDataAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTDataAActionPerformed
-
-    }//GEN-LAST:event_jFTDataAActionPerformed
-
-    private void jFTDataAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataAFocusLost
-
-    }//GEN-LAST:event_jFTDataAFocusLost
-
-    private void jFTDataAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTDataAKeyReleased
-
-    }//GEN-LAST:event_jFTDataAKeyReleased
-
-    private void jFTDataA1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA1FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA1FocusGained
-
-    private void jFTDataA1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA1FocusLost
-
-    private void jFTDataA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTDataA1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA1ActionPerformed
-
-    private void jFTDataA1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTDataA1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA1KeyReleased
-
-    private void jFTDataA2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA2FocusGained
-
-    private void jFTDataA2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA2FocusLost
-
-    private void jFTDataA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTDataA2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA2ActionPerformed
-
-    private void jFTDataA2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTDataA2KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA2KeyReleased
-
-    private void jFTDataA3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA3FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA3FocusGained
-
-    private void jFTDataA3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA3FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA3FocusLost
-
-    private void jFTDataA3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTDataA3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA3ActionPerformed
-
-    private void jFTDataA3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTDataA3KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA3KeyReleased
-
-    private void jFTDataA4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA4FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA4FocusGained
-
-    private void jFTDataA4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTDataA4FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA4FocusLost
-
-    private void jFTDataA4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTDataA4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA4ActionPerformed
-
-    private void jFTDataA4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTDataA4KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFTDataA4KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGravar;
-    private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JFormattedTextField jFTDataA;
-    private javax.swing.JFormattedTextField jFTDataA1;
-    private javax.swing.JFormattedTextField jFTDataA2;
-    private javax.swing.JFormattedTextField jFTDataA3;
-    private javax.swing.JFormattedTextField jFTDataA4;
+    private javax.swing.JFormattedTextField jFTCor;
+    private javax.swing.JFormattedTextField jFTMarca;
+    private javax.swing.JFormattedTextField jFTModelo;
+    private javax.swing.JFormattedTextField jFTPlaca;
+    private javax.swing.JFormattedTextField jFTVaga;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -350,9 +178,14 @@ public class AddCarro extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
-    void showDialog() {
+    Veiculo showDialog() {
         this.setVisible(true);
+        if (check == 1) {
+            return veiculo;
+        } else {
+            return null;
 
+        }
     }
 
     private void formatarCampo() {
@@ -362,11 +195,26 @@ public class AddCarro extends javax.swing.JDialog {
             mask.setPlaceholder("__/__/____");
             mask2.setPlaceholder("");
 
-
-
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao formatar", "ERRO", JOptionPane.ERROR);
         }
+    }
+
+    private void gravaBD(Veiculo veiculo) {
+        FicharioVeiculo fichario = new FicharioVeiculo();
+        try {
+            fichario.add(veiculo);
+        } catch (Exception ex) {
+            Logger.getLogger(AddCarro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void preencher(Veiculo veiculo) {
+        jFTMarca.setText(veiculo.getMarca());
+        jFTModelo.setText(veiculo.getModelo());
+        jFTCor.setText(veiculo.getCor());
+        jFTPlaca.setText(veiculo.getPlaca());
+        jFTVaga.setText(veiculo.getVagaOcupada());
     }
 
 }

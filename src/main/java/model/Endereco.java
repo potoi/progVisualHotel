@@ -21,6 +21,7 @@ public class Endereco {
 
     public Endereco() {
     }
+    private int id;
     private String logradouro;
     private String numero;
     private String bairro;
@@ -28,6 +29,15 @@ public class Endereco {
     private String complemento;
     private String cep;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getLogradouro() {
         return logradouro;
     }

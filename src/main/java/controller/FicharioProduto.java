@@ -15,7 +15,7 @@ import model.Produto;
  */
 public class FicharioProduto {
 
-    public ProdutoDAO dao = new ProdutoDAO();
+    private ProdutoDAO dao = new ProdutoDAO();
 
     public FicharioProduto() {
     }
@@ -38,7 +38,7 @@ public class FicharioProduto {
                 stringTotal[i][0] = Integer.toString(c.getIdentificador());
 
                 stringTotal[i][1] = c.getDescricao();
-                stringTotal[i][2] = Double.toString(c.getPreco());
+                stringTotal[i][2] = "R$ "+Double.toString(c.getPreco());
 
                 stringTotal[i][3] = c.getMarca();
 
@@ -52,8 +52,8 @@ public class FicharioProduto {
         return stringTotal;
     }
 
-    public void remove(int i, ArrayList array) {
-        array.remove(i);
+    public void remove(int i) throws Exception {
+        dao.apagar(i);
     }
 
     public void add(Produto e) throws Exception {
@@ -61,32 +61,16 @@ public class FicharioProduto {
 
     }
 
-    /*
-    public int findIndex(int id) {
-        
-        int i = 0;
-        for (Item item : arrayItem) {
-            if (item instanceof Produto produto) {
-                if (produto.getIdentificador() == id) {
-                    return i;
-                }
-                i++;
-            }
-
-        }
-        return -1;
-
-    }
-     */
-    public void remove(int index) {
-
-    }
-
     public Produto achar(int index) throws Exception {
         Produto produto = dao.consulta(index);
         return produto;
     }
-    public void alterar(Produto produto, int id) throws Exception{
+
+    public void alterar(Produto produto, int id) throws Exception {
         dao.alterar(produto, id);
+    }
+
+    public ArrayList<Produto> listar() throws Exception {
+        return dao.listar();
     }
 }

@@ -17,11 +17,20 @@ public class Funcionario {
     }
 
     public Funcionario() {
-   
+
     }
+    private int id;
     private String matricula;
     private String nome;
     private String profissao;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMatricula() {
         return matricula;

@@ -16,6 +16,10 @@ public class Servico extends Item {
         this.equipamento = equipamento;
     }
 
+    public Servico() {
+        
+    }
+
     public Funcionario[] getProfissionais() {
         return profissionais;
     }

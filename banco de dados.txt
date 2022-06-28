@@ -16,20 +16,25 @@ pais varchar (50) not null
 	
 
 );
-drop table if exists carros;
-create table carros(
+drop table if exists veiculos;
+create table veiculos(
+id serial primary key,
 marca varchar(40) not null,
 modelo varchar(50) not null,
 cor varchar (50) not null,
-placa varchar (10) not null,
-vagaOcupada varchar(50) not null
+placa varchar (20) not null,
+vagaOcupada varchar(50) not null,
+idPessoaF int,
+idPessoaJ int,
+foreign key (idPessoaF) references clientesfisico(id),
+foreign key (idPessoaJ) references clientesjuridico(id)
 );
 
 drop table if exists enderecos;
 create table enderecos(
 id serial primary key,
 logradouro varchar(40),
-numero int not null,
+numero varchar(10) not null,
 bairro varchar (50) not null,
 municipioId int not null,
 complemento varchar(50) not null,
@@ -44,7 +49,7 @@ nome varchar (50) not null,
 enderecoId int not null,
 telefoneFixo varchar (50) not null,
 telefoneCelular varchar (50) not null,
-cpf varchar (12) not null,
+cpf varchar (16) not null,
 
 foreign key (enderecoId) references enderecos(id)
 );
@@ -54,14 +59,14 @@ drop table if exists clientesJuridico;
 create table clientesJuridico(
 id serial primary key,
 nome varchar (50) not null,
-idEndereco int not null,
+enderecoId int not null,
 telefoneComercial varchar (50) not null,
-telefoneCelular varchar (50) not null,
-cnpj varchar (12) not null,
+telefoneFixo varchar (50) not null,
+cnpj varchar (18) not null,
 nomeFantasia varchar(30) not null,
 
 
-foreign key (idEndereco) references enderecos(id)
+foreign key (enderecoId) references enderecos(id)
 );
 
 
@@ -74,7 +79,8 @@ descricao varchar (50) not null
 
 drop table if exists funcionarios;
 create table funcionarios(
-matricula varchar(50) primary key,
+id serial primary key,
+matricula varchar(50) not null,
 nome varchar (50) not null,
 profissao varchar (50) not null
 );
@@ -97,9 +103,9 @@ foreign key (idEquipamento) references equipamentos(id)
 drop table if exists servico_funcionario;
 create table servico_funcionario(
 idServico int ,	
-matricula varchar(50) ,
+idFuncionario int ,
 foreign key (idServico) references servicos(id),
-foreign key (matricula) references funcionarios(matricula)
+foreign key (idFuncionario) references funcionarios(id)
 );
 
 drop table if exists contas;
@@ -111,7 +117,6 @@ total float,
 idClienteFisico int,
 idClienteJuridico int,
 quarto int not null,
-preco float not null,
 foreign key (idClienteFisico) references clientesFisico(id),
 foreign key (idClienteJuridico) references clientesJuridico(id)
 
@@ -146,13 +151,13 @@ foreign key (idConta) references contas(id)
 drop table if exists parcelas;
 create table parcelas(
 id serial primary key,
-idConta int not null,
+idFatura int not null,
 dataVencimento date not null,
 dataPagamento date ,
 valor float,
 juroMoraAplicado float,
 valorFinal float,
-foreign key (idConta) references contas(id)
+foreign key (idFatura) references contas(id)
 
 );
 

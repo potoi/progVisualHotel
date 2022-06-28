@@ -18,6 +18,7 @@ public class Parcela {
     private double valor;
     private double jurosMoraAplicado;
     private double valorfinal;
+    private int idFatura;
 
     public Parcela(int identificador, LocalDate dataVencimento, LocalDate dataPagamento, double valor, double jurosMoraAplicado, double valorfinal) {
         this.identificador = identificador;
@@ -27,8 +28,17 @@ public class Parcela {
         this.jurosMoraAplicado = jurosMoraAplicado;
         this.valorfinal = valorfinal;
     }
-    public Parcela(){
-        
+
+    public Parcela() {
+
+    }
+
+    public int getIdFatura() {
+        return idFatura;
+    }
+
+    public void setIdFatura(int idFatura) {
+        this.idFatura = idFatura;
     }
 
     public int getIdentificador() {

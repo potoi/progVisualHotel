@@ -18,10 +18,19 @@ public class Municipio {
         this.estado = estado;
         this.pais = pais;
     }
-    
+
+    private int id;
     private String nome;
     private String estado;
     private String pais;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -46,5 +55,5 @@ public class Municipio {
     public void setPais(String pais) {
         this.pais = pais;
     }
-    
+
 }

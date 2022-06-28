@@ -38,7 +38,7 @@ public class ProdutoDAO {
         ps.setDouble(2, prod.getPreco());
         ps.setString(3, prod.getMarca());
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyyy");
         Date data = Date.valueOf(prod.getValidade());
         df.format(data);
         ps.setDate(4, data);
@@ -60,7 +60,7 @@ public class ProdutoDAO {
         ps.setDouble(2, prod.getPreco());
         ps.setString(3, prod.getMarca());
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyyy");
         Date data = Date.valueOf(prod.getValidade());
         df.format(data);
         ps.setDate(4, data);

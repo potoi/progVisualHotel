@@ -38,7 +38,7 @@ public class AddProduto extends javax.swing.JDialog {
 
     public AddProduto(java.awt.Frame parent, boolean modal, Produto produto) {
         super(parent, modal);
-        this.setTitle("Cadastro de Produto");
+        this.setTitle("Alterar Produto");
         initComponents();
         formatarCampo();
         preencher(produto);
@@ -268,10 +268,10 @@ public class AddProduto extends javax.swing.JDialog {
             prod.setMarca(jFTMarca.getText());
             int dia, mes, ano, index;
             String texto = jFTValidade.getText();
-            index = texto.indexOf("/");
+            index = texto.indexOf("-");
             dia = Integer.parseInt(texto.substring(0, index));
             texto = texto.substring(index + 1);
-            index = texto.indexOf("/");
+            index = texto.indexOf("-");
             mes = Integer.parseInt(texto.substring(0, index));
             texto = texto.substring(index + 1);
             ano = Integer.parseInt(texto);
@@ -294,7 +294,7 @@ public class AddProduto extends javax.swing.JDialog {
                             j.setText("");
                         }
                     }
-                    jFTValidade.setText("__/__/____");
+                    jFTValidade.setText("__-__-____");
                 }
 
             }
@@ -326,8 +326,8 @@ public class AddProduto extends javax.swing.JDialog {
 
     private void formatarCampo() {
         try {
-            mask.setMask("**/**/****");
-            mask.setPlaceholder("__/__/____");
+            mask.setMask("**-**-****");
+            mask.setPlaceholder("__-__-____");
             mask.install(jFTValidade);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao formatar", "ERRO", JOptionPane.ERROR);
@@ -345,7 +345,7 @@ public class AddProduto extends javax.swing.JDialog {
         ano = produto.getValidade().getYear();
         String diaFormat = String.format("%02d", dia);
         String mesFormat = String.format("%02d", mes);
-        jFTValidade.setText(diaFormat + "/" + mesFormat + "/" + ano);
+        jFTValidade.setText(diaFormat + "-" + mesFormat + "-" + ano);
     }
 
     private void gravaBD() {

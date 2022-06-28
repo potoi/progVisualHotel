@@ -20,9 +20,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-
-import model.Item;
-import model.Produto;
+import model.Cliente;
+import model.Conta;
 
 /**
  *
@@ -33,9 +32,12 @@ public class AddConta extends javax.swing.JDialog {
     /**
      * Creates new form CrudAlterConta
      */
-    public AddConta() {
+    private Conta conta;
 
-        this.setTitle("Nova Conta:Usuário xxx");
+    public AddConta(java.awt.Frame parent, boolean modal, Cliente c) {
+
+        super(parent, modal);
+        this.setTitle("Nova Conta:Cliente " + c.getNome());
         initComponents();
         formatarCampo();
         jFTDataA.setText(getDataAtual());
@@ -50,7 +52,6 @@ public class AddConta extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonVoltar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButtonGravar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -58,14 +59,6 @@ public class AddConta extends javax.swing.JDialog {
         jFTQuarto = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jButtonVoltar.setText("<<<");
-        jButtonVoltar.setFocusable(false);
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltarActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Quarto:");
 
@@ -97,6 +90,11 @@ public class AddConta extends javax.swing.JDialog {
             }
         });
 
+        jFTQuarto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTQuartoFocusGained(evt);
+            }
+        });
         jFTQuarto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTQuartoActionPerformed(evt);
@@ -107,9 +105,6 @@ public class AddConta extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButtonVoltar)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,9 +122,7 @@ public class AddConta extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jFTDataA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,11 +139,28 @@ public class AddConta extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
-
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
+        try {
+            Conta conta = new Conta();
+            int dia, mes, ano, index;
+            String texto = jFTDataA.getText();
+            index = texto.indexOf("/");
+            dia = Integer.parseInt(texto.substring(0, index));
+            texto = texto.substring(index + 1);
+            index = texto.indexOf("/");
+            mes = Integer.parseInt(texto.substring(0, index));
+            texto = texto.substring(index + 1);
+            ano = Integer.parseInt(texto);
+            LocalDate date = LocalDate.of(ano, mes, dia);
+            conta.setDataAbertura(date);
+            conta.setQuarto(Integer.parseInt(jFTQuarto.getText().trim()));
+            this.conta = conta;
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
+                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+            Logger.getLogger(AddConta.class.getName()).log(Level.SEVERE, null, e);
+        }
 
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
@@ -180,7 +190,9 @@ public class AddConta extends javax.swing.JDialog {
             jFTQuarto.requestFocus();
 
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
+                    + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+            Logger.getLogger(CrudProduto.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jFTDataAFocusLost
 
@@ -208,18 +220,22 @@ public class AddConta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jFTDataAKeyReleased
 
+    private void jFTQuartoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTQuartoFocusGained
+        jFTQuarto.setCaretPosition(0);
+    }//GEN-LAST:event_jFTQuartoFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGravar;
-    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JFormattedTextField jFTDataA;
     private javax.swing.JFormattedTextField jFTQuarto;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
-    void showDialog() {
+    Conta showDialog() {
         this.setVisible(true);
+        return conta;
 
     }
 
@@ -228,10 +244,8 @@ public class AddConta extends javax.swing.JDialog {
             MaskFormatter mask = new MaskFormatter("**/**/****");
             MaskFormatter mask2 = new MaskFormatter("##");
             mask.setPlaceholder("__/__/____");
-            mask2.setPlaceholder("");
             mask.install(jFTDataA);
             mask2.install(jFTQuarto);
-
 
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao formatar", "ERRO", JOptionPane.ERROR);
@@ -246,7 +260,7 @@ public class AddConta extends javax.swing.JDialog {
         mes = date.getMonthValue();
         String mesFormat = String.format("%02d", mes);
         ano = date.getYear();
-        return(diaFormat + "/" + mesFormat + "/" + ano);
+        return (diaFormat + "/" + mesFormat + "/" + ano);
     }
 
 }

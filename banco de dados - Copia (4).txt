@@ -1,0 +1,174 @@
+
+DROP TABLE IF EXISTS produtos;
+create table produtos (
+id serial primary key,
+descricao varchar(100),
+preco float not null,
+marca varchar(50) not null,
+validade date 
+);
+drop table if exists municipios;
+create table municipios(
+id serial primary key,
+nome varchar(100) not null,
+estado varchar(50) not null,
+pais varchar (50) not null
+	
+
+);
+drop table if exists veiculos;
+create table veiculos(
+id serial primary key,
+marca varchar(40) not null,
+modelo varchar(50) not null,
+cor varchar (50) not null,
+placa varchar (20) not null,
+vagaOcupada varchar(50) not null,
+idPessoaF int,
+idPessoaJ int,
+foreign key (idPessoaF) references clientesfisico(id),
+foreign key (idPessoaJ) references clientesjuridico(id)
+);
+
+drop table if exists enderecos;
+create table enderecos(
+id serial primary key,
+logradouro varchar(40),
+numero varchar(10) not null,
+bairro varchar (50) not null,
+municipioId int not null,
+complemento varchar(50) not null,
+cep varchar(15) not null,
+foreign key (municipioId) references municipios(id)
+);
+
+drop table if exists clientesFisico;
+create table clientesFisico(
+id serial primary key,
+nome varchar (50) not null,
+enderecoId int not null,
+telefoneFixo varchar (50) not null,
+telefoneCelular varchar (50) not null,
+cpf varchar (16) not null,
+
+foreign key (enderecoId) references enderecos(id)
+);
+
+
+drop table if exists clientesJuridico;
+create table clientesJuridico(
+id serial primary key,
+nome varchar (50) not null,
+enderecoId int not null,
+telefoneComercial varchar (50) not null,
+telefoneFixo varchar (50) not null,
+cnpj varchar (18) not null,
+nomeFantasia varchar(30) not null,
+
+
+foreign key (enderecoId) references enderecos(id)
+);
+
+
+drop table if exists equipamentos;
+create table equipamentos(
+id serial primary key,
+descricao varchar (50) not null
+
+);
+
+drop table if exists funcionarios;
+create table funcionarios(
+id serial primary key,
+matricula varchar(50) not null,
+nome varchar (50) not null,
+profissao varchar (50) not null
+);
+
+drop table if exists servicos;
+create table servicos(
+id serial primary key,	
+descricao varchar (50) not null,
+preco float not null
+);
+
+drop table if exists servico_equipamento;
+create table servico_equipamento(
+idServico int ,	
+idEquipamento int ,
+foreign key (idServico) references servicos(id),
+foreign key (idEquipamento) references equipamentos(id)
+);
+
+drop table if exists servico_funcionario;
+create table servico_funcionario(
+idServico int ,	
+idFuncionario int ,
+foreign key (idServico) references servicos(id),
+foreign key (idFuncionario) references funcionarios(id)
+);
+
+drop table if exists contas;
+create table contas(
+id serial primary key,	
+dataAbertura date not null,
+dataFechamento date,
+total float,
+idClienteFisico int,
+idClienteJuridico int,
+quarto int not null,
+foreign key (idClienteFisico) references clientesFisico(id),
+foreign key (idClienteJuridico) references clientesJuridico(id)
+
+);
+
+drop table if exists conta_produto;
+create table conta_produto(
+idConta int ,	
+idProduto int,
+foreign key (idConta) references contas(id),
+foreign key (idProduto) references produtos(id)
+);
+
+drop table if exists conta_servico;
+create table conta_servico(
+idConta int ,	
+idServico int,
+foreign key (idConta) references contas(id),
+foreign key (idServico) references servicos(id)
+);
+
+drop table if exists faturas;
+create table faturas(
+idConta int not null primary key,	
+dataLiquidacao date not null,
+qtdParcelas int not null,
+tipoPagamento int not null,
+foreign key (idConta) references contas(id)
+
+);
+
+drop table if exists parcelas;
+create table parcelas(
+id serial primary key,
+idConta int not null,
+dataVencimento date not null,
+dataPagamento date ,
+valor float,
+juroMoraAplicado float,
+valorFinal float,
+foreign key (idConta) references contas(id)
+
+);
+
+drop table if exists usuarios;
+create table usuarios(
+nome varchar(40) primary key not null,
+senha varchar(64) not null
+);
+
+
+
+
+
+
