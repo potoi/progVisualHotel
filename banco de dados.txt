@@ -167,7 +167,16 @@ nome varchar(40) primary key not null,
 senha varchar(64) not null
 );
 
-
+drop table if exists pets;
+create table pets(
+id serial primary key,
+animal varchar(40) not null,
+descricao varchar(50) not null,
+idPessoaF int,
+idPessoaJ int,
+foreign key (idPessoaF) references clientesfisico(id),
+foreign key (idPessoaJ) references clientesjuridico(id)
+);
 
 
 
