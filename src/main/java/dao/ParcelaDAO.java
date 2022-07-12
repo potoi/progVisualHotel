@@ -96,6 +96,19 @@ public class ParcelaDAO {
         ps.close();
 
     }
+    
+    public void apagarFaturaId(int id) throws Exception {
+        String sql;
+        PreparedStatement ps = null;
+
+        sql = "DELETE FROM parcelas WHERE idfatura = ?";
+
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.execute();
+        ps.close();
+
+    }
 
     public Parcela consulta(int id) throws Exception {
         String sql;

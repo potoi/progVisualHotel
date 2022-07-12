@@ -19,10 +19,12 @@ import javax.swing.text.MaskFormatter;
 import model.Endereco;
 import model.Municipio;
 import model.PessoaFisica;
+import model.Pet;
 import model.Veiculo;
 
 public class AddPessoaFisica extends javax.swing.JDialog {
 
+    private ArrayList<Pet> arrayP = new ArrayList<>();
     private ArrayList<Veiculo> arrayV = new ArrayList<>();
     private DefaultListModel modelL = new DefaultListModel();
     private PessoaFisica pessoafisica;
@@ -34,6 +36,7 @@ public class AddPessoaFisica extends javax.swing.JDialog {
         initComponents();
         formatarCampo();
         jList1.setModel(modelL);
+        jButtonAddP.setText("Pet(" + arrayP.size() + ")");
     }
 
     public AddPessoaFisica(java.awt.Frame parent, boolean modal, PessoaFisica pessoafisica) {
@@ -44,6 +47,7 @@ public class AddPessoaFisica extends javax.swing.JDialog {
         formatarCampo();
         jList1.setModel(modelL);
         preencher(pessoafisica);
+        jButtonAddP.setText("Pet(" + arrayP.size() + ")");
     }
 
     @SuppressWarnings("unchecked")
@@ -67,6 +71,7 @@ public class AddPessoaFisica extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jTFPais = new javax.swing.JTextField();
         jTFMunicipio = new javax.swing.JTextField();
+        jButtonAddP = new javax.swing.JButton();
         jTFEstado = new javax.swing.JTextField();
         jTFQntCarros = new javax.swing.JTextField();
         jButtonRemC = new javax.swing.JButton();
@@ -132,6 +137,14 @@ public class AddPessoaFisica extends javax.swing.JDialog {
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 149, -1, -1));
         getContentPane().add(jTFPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 44, 165, -1));
         getContentPane().add(jTFMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 112, 165, -1));
+
+        jButtonAddP.setText("Pet");
+        jButtonAddP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddPActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAddP, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 110, -1));
         getContentPane().add(jTFEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 78, 165, -1));
 
         jTFQntCarros.setEditable(false);
@@ -228,9 +241,12 @@ public class AddPessoaFisica extends javax.swing.JDialog {
         pessoafisica.setNome(jTFNome.getText());
         pessoafisica.setTelefoneCelular(jFTTelC.getText());
         pessoafisica.setTelefoneFixo(jFTTelF.getText());
-        Veiculo[] arr = new Veiculo[arrayV.size()];
 
+        Veiculo[] arr = new Veiculo[arrayV.size()];
         pessoafisica.setVeiculos(arrayV.toArray(arr));
+
+        Pet[] arr2 = new Pet[arrayP.size()];
+        pessoafisica.setPets(arrayP.toArray(arr2));
 
         pessoafisica.setEnderecoResidencial(endereco);
 
@@ -318,9 +334,21 @@ public class AddPessoaFisica extends javax.swing.JDialog {
         jFTCep.setCaretPosition(0);
     }//GEN-LAST:event_jFTCepFocusGained
 
+    private void jButtonAddPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddPActionPerformed
+        TelaAddPet tela = new TelaAddPet(null, true, arrayP);
+        ArrayList<Pet> arrayTemp = tela.showDialog();
+        if (arrayTemp != null) {
+            arrayP = arrayTemp;
+            jButtonAddP.setText("Pet(" + arrayP.size() + ")");
+        }
+
+
+    }//GEN-LAST:event_jButtonAddPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButtonAddP;
     private javax.swing.JButton jButtonAddV;
     private javax.swing.JButton jButtonAltC;
     private javax.swing.JButton jButtonGravar;
@@ -355,7 +383,7 @@ public class AddPessoaFisica extends javax.swing.JDialog {
     private javax.swing.JTextField jTFQntCarros;
     // End of variables declaration//GEN-END:variables
 
-    PessoaFisica showDialog() {
+    public PessoaFisica showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return pessoafisica;

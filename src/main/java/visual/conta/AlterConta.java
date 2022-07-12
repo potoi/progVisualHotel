@@ -4,15 +4,16 @@
  */
 package visual.conta;
 
+import controller.FicharioConta;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-import model.Cliente;
 import model.Conta;
 import model.Item;
 import model.Produto;
@@ -23,7 +24,7 @@ public class AlterConta extends javax.swing.JDialog {
     private ArrayList<Item> arrayI = new ArrayList<>();
     private ArrayList<Produto> arrayP = new ArrayList<>();
     private ArrayList<Servico> arrayS = new ArrayList<>();
-
+    private FicharioConta fichario = new FicharioConta();
     private DefaultListModel modelL = new DefaultListModel();
     private Conta conta;
     public int check = 0;
@@ -59,6 +60,7 @@ public class AlterConta extends javax.swing.JDialog {
         jButtonAddServico = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jFTTotal = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +90,7 @@ public class AlterConta extends javax.swing.JDialog {
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
+        jFTQuarto.setEditable(false);
         jFTQuarto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jFTQuartoFocusGained(evt);
@@ -163,6 +166,13 @@ public class AlterConta extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setText("Escolher");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,20 +197,24 @@ public class AlterConta extends javax.swing.JDialog {
                                 .addComponent(jFTTotal))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jFTFechamento, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(jFTAbertura)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jFTQuarto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFTQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(jFTFechamento)
-                            .addComponent(jFTAbertura))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(jButton1)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +235,8 @@ public class AlterConta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFTQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
+                            .addComponent(jLabel7)
+                            .addComponent(jButton1))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -275,6 +290,9 @@ public class AlterConta extends javax.swing.JDialog {
                 ano = Integer.parseInt(texto);
                 date = LocalDate.of(ano, mes, dia);
                 conta.setDataFechamento(date);
+                if (conta.getDataAbertura().isAfter(conta.getDataFechamento())) {
+                    throw new Exception("Data de fechamento inválida");
+                }
             }
 
             conta.setQuarto(Integer.parseInt(jFTQuarto.getText().trim()));
@@ -359,7 +377,7 @@ public class AlterConta extends javax.swing.JDialog {
             modelL.addElement(prod.getDescricao());
 
         }
-        
+
         for (Item prod : arrayS) {
             total += prod.getPreco();
             modelL.addElement(prod.getDescricao());
@@ -409,10 +427,29 @@ public class AlterConta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFTQuartoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        JComboBox cb;
+        try {
+            cb = new JComboBox(fichario.quartosDisponivel().toArray());
+
+            int input;
+            input = JOptionPane.showConfirmDialog(this, cb,
+                "Selecione o quarto disponível", JOptionPane.DEFAULT_OPTION);
+            if (input == JOptionPane.OK_OPTION) {
+                String str = (String) cb.getSelectedItem();
+                jFTQuarto.setText(str);
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAddProduto;
     private javax.swing.JButton jButtonAddServico;
     private javax.swing.JButton jButtonGravar;
@@ -428,7 +465,7 @@ public class AlterConta extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    Conta showDialog() {
+    public Conta showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return conta;

@@ -210,7 +210,7 @@ public class AddMunicipio extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 
-    Municipio showDialog() {
+   public Municipio showDialog() {
         this.setVisible(true);
         return produto;
 

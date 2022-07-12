@@ -5,28 +5,20 @@
 package visual.cliente;
 
 import controller.FicharioPet;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import model.Pet;
-import recursos.ImagemFichario;
 
-/**
- *
- * @author Victor
- */
 public class TelaAddPet extends javax.swing.JDialog {
 
-    private Color cor;
-    private Pet pet;
+    private DefaultTableModel dtm;
     private int check = 0;
+    private ArrayList<Pet> arrayP = new ArrayList<>();
 
     public TelaAddPet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,13 +27,24 @@ public class TelaAddPet extends javax.swing.JDialog {
         formatarCampo();
     }
 
-    public TelaAddPet(java.awt.Frame parent, boolean modal, Pet pet) {
+    public TelaAddPet(java.awt.Frame parent, boolean modal, ArrayList<Pet> aPet) {
         super(parent, modal);
-        this.setTitle("Alterar Pet");
-        this.pet = pet;
+        this.setTitle("Cadastro de Pet");
+        dtm = new DefaultTableModel(0, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         initComponents();
+        jTable1.setModel(dtm);
+        this.arrayP = aPet;
+
+        dtm.addColumn("Tipo de Animal");
+        dtm.addColumn("Descrição");
         formatarCampo();
-        preencher(pet);
+        preencher(arrayP);
     }
 
     /**
@@ -58,6 +61,10 @@ public class TelaAddPet extends javax.swing.JDialog {
         jFTMarca = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         jFTModelo = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButtonInserir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,38 +79,69 @@ public class TelaAddPet extends javax.swing.JDialog {
 
         jLabel3.setText("Descrição:");
 
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setText("Remover");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButtonInserir.setText("Inserir");
+        jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInserirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFTMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFTModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(59, Short.MAX_VALUE))
+                            .addComponent(jFTModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(jFTMarca)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jFTMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jFTModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jFTMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jFTModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -111,38 +149,52 @@ public class TelaAddPet extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
+        check = 1;
+        this.dispose();
+    }//GEN-LAST:event_jButtonGravarActionPerformed
+
+    private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
         Pet pet = new Pet();
         try {
-            this.pet = pet;
+
             pet.setAnimal(jFTMarca.getText());
             pet.setDescricao(jFTModelo.getText());
-
-            if (this.pet != null) {
-                pet.setId(this.pet.getId());
-            }
-            this.pet = pet;
-            check = 1;
-            this.dispose();
+            arrayP.add(pet);
+            preencher(arrayP);
+            jFTMarca.setText("");
+            jFTModelo.setText("");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
                     + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonGravarActionPerformed
+    }//GEN-LAST:event_jButtonInserirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int i = jTable1.getSelectedRow();
+        dtm.removeRow(i);
+        arrayP.remove(i);
+        preencher(arrayP);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonGravar;
+    private javax.swing.JButton jButtonInserir;
     private javax.swing.JFormattedTextField jFTMarca;
     private javax.swing.JFormattedTextField jFTModelo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    Pet showDialog() {
+    public ArrayList<Pet> showDialog() {
         this.setVisible(true);
         if (check == 1) {
-            return pet;
+            return arrayP;
         } else {
             return null;
 
@@ -170,9 +222,15 @@ public class TelaAddPet extends javax.swing.JDialog {
         }
     }
 
-    private void preencher(Pet pet) {
-        jFTMarca.setText(pet.getAnimal());
-        jFTModelo.setText(pet.getDescricao());
+    private void preencher(ArrayList<Pet> pet) {
+        dtm.setRowCount(0);
+        for (Pet p : pet) {
+            String[] str = new String[2];
+            str[0] = p.getAnimal();
+            str[1] = p.getDescricao();
+            dtm.insertRow(dtm.getRowCount(), str);
+
+        }
 
     }
 

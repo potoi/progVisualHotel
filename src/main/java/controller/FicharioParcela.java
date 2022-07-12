@@ -42,4 +42,8 @@ public class FicharioParcela {
         return dao.consultaFatura(i);
     }
 
+    public void removeIdFatura(int i) throws Exception {
+        dao.apagarFaturaId(i);
+    }
+
 }

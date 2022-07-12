@@ -4,33 +4,21 @@
  */
 package visual.servico;
 
-import visual.fatura.CrudFatura;
-import visual.funcionario.CrudFuncionario;
-import visual.equipamento.CrudEquipamento;
-import visual.cliente.CrudVeiculo;
-import visual.cliente.CrudPessoaF;
-import visual.cliente.CrudPessoaJ;
-import visual.endereco.CrudEndereco;
-import visual.conta.CrudConta;
 import controller.FicharioServico;
-import java.awt.Color;
 import model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DropMode;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import recursos.ImagemFichario;
 import recursos.Util;
-import visual.produto.CrudProduto;
-import visual.principal.TelaPrincipal;
 
 /**
  *
  * @author Victor
  */
-public class CrudServico extends javax.swing.JFrame {
+public class CrudServico extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtm;
     private FicharioServico ficharioAtual = new FicharioServico();
@@ -60,16 +48,6 @@ public class CrudServico extends javax.swing.JFrame {
         jButtonRemove = new javax.swing.JButton();
         jButtonAdd = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuCliente = new javax.swing.JMenuItem();
-        jMenuConta = new javax.swing.JMenuItem();
-        jMenuProdutos = new javax.swing.JMenuItem();
-        jMenuServicos = new javax.swing.JMenuItem();
-        jMenuFaturas = new javax.swing.JMenuItem();
-        jMenuEquipamentos = new javax.swing.JMenuItem();
-        jMenuFuncionarios = new javax.swing.JMenuItem();
-        jMenuTelaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,78 +94,7 @@ public class CrudServico extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, -1, -1));
 
-        jMenu2.setText("Telas");
-
-        jMenuCliente.setText("Cliente");
-        jMenuCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuClienteActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuCliente);
-
-        jMenuConta.setText("Conta");
-        jMenuConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuContaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuConta);
-
-        jMenuProdutos.setText("Produtos");
-        jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuProdutosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuProdutos);
-
-        jMenuServicos.setText("Serviços");
-        jMenuServicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuServicosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuServicos);
-
-        jMenuFaturas.setText("Faturas");
-        jMenuFaturas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFaturasActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuFaturas);
-
-        jMenuEquipamentos.setText("Equipamento");
-        jMenuEquipamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEquipamentosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuEquipamentos);
-
-        jMenuFuncionarios.setText("Funcionário");
-        jMenuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFuncionariosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuFuncionarios);
-
-        jMenuTelaPrincipal.setText("Tela Principal");
-        jMenuTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuTelaPrincipalActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuTelaPrincipal);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterActionPerformed
@@ -196,7 +103,7 @@ public class CrudServico extends javax.swing.JFrame {
                 int id = Integer.parseInt(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
                 Servico produtoantes = ficharioAtual.achar(id);
 
-                AddServico tela = new AddServico(this, true, produtoantes);
+                AddServico tela = new AddServico(null, true, produtoantes);
                 Servico produtodps = tela.showDialog();
 
                 if (produtodps != null) {
@@ -235,58 +142,10 @@ public class CrudServico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        AddServico tela = new AddServico(this, true);
+        AddServico tela = new AddServico(null, true);
         tela.showDialog();
         atualizaTabela();
     }//GEN-LAST:event_jButtonAddActionPerformed
-
-    private void jMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClienteActionPerformed
-        CrudPessoaF crud = new CrudPessoaF();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuClienteActionPerformed
-
-    private void jMenuContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContaActionPerformed
-        CrudConta crud = new CrudConta();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuContaActionPerformed
-
-    private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
-        CrudProduto crud = new CrudProduto();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuProdutosActionPerformed
-
-    private void jMenuServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuServicosActionPerformed
-        CrudServico crud = new CrudServico();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuServicosActionPerformed
-
-    private void jMenuFaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturasActionPerformed
-        CrudFatura crud = new CrudFatura();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuFaturasActionPerformed
-
-    private void jMenuEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEquipamentosActionPerformed
-        CrudEquipamento crud = new CrudEquipamento();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuEquipamentosActionPerformed
-
-    private void jMenuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFuncionariosActionPerformed
-        CrudFuncionario crud = new CrudFuncionario();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuFuncionariosActionPerformed
-
-    private void jMenuTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTelaPrincipalActionPerformed
-        TelaPrincipal principal = TelaPrincipal.voltarTelaPrincipal();
-        principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuTelaPrincipalActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
           Util.fazRelatorio("servicos.jasper");
@@ -319,16 +178,6 @@ public class CrudServico extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonAlter;
     private javax.swing.JButton jButtonRemove;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuCliente;
-    private javax.swing.JMenuItem jMenuConta;
-    private javax.swing.JMenuItem jMenuEquipamentos;
-    private javax.swing.JMenuItem jMenuFaturas;
-    private javax.swing.JMenuItem jMenuFuncionarios;
-    private javax.swing.JMenuItem jMenuProdutos;
-    private javax.swing.JMenuItem jMenuServicos;
-    private javax.swing.JMenuItem jMenuTelaPrincipal;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;

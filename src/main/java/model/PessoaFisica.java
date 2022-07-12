@@ -9,7 +9,7 @@ package model;
  * @author Victor
  */
 public class PessoaFisica extends Cliente {
-    
+
     private String cpf;
 
     public PessoaFisica(String cpf, int id, String nome, Endereco enderecoResidencial, Endereco enderecoComercial, Veiculo[] veiculos, String telefoneFixo, String telefoneCelular, String telefoneComercial) {
@@ -22,7 +22,7 @@ public class PessoaFisica extends Cliente {
     }
 
     public PessoaFisica() {
-     
+
     }
 
     public String getCpf() {
@@ -32,5 +32,5 @@ public class PessoaFisica extends Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
+
 }

@@ -111,7 +111,7 @@ public class ContaDAO {
         }
 
         ps.setInt(3, cont.getQuarto());
-         ps.setDouble(4, cont.getTotal());
+        ps.setDouble(4, cont.getTotal());
         ps.setInt(5, id);
         ps.execute();
         ps.close();
@@ -220,6 +220,26 @@ public class ContaDAO {
             cont.setQuarto(rs.getInt("quarto"));
 
             contas.add(cont);
+        }
+        rs.close();
+        ps.close();
+
+        return contas;
+    }
+
+    public ArrayList<String> listarQuartos() throws Exception {
+        String sql;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        sql = "select quarto from contas where datafechamento isNUll and dataabertura < now()";
+
+        ArrayList<String> contas = new ArrayList<>();
+
+        ps = conn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            contas.add(rs.getString("quarto"));
         }
         rs.close();
         ps.close();

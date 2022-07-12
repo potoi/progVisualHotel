@@ -8,6 +8,7 @@ import dao.EnderecoDAO;
 import dao.MunicipioDAO;
 import dao.PessoaFisicaDAO;
 import dao.PessoaJuridicaDAO;
+import dao.PetDAO;
 import dao.VeiculoDAO;
 import java.util.ArrayList;
 import model.Cliente;
@@ -15,6 +16,7 @@ import model.Item;
 import model.Municipio;
 import model.PessoaFisica;
 import model.PessoaJuridica;
+import model.Pet;
 import model.Veiculo;
 
 /**
@@ -27,6 +29,7 @@ public class FicharioPessoaF {
     private PessoaJuridicaDAO daoJ = new PessoaJuridicaDAO();
     private EnderecoDAO endeDAO = new EnderecoDAO();
     private VeiculoDAO veicDAO = new VeiculoDAO();
+    private PetDAO petDAO = new PetDAO();
     private MunicipioDAO muniDAO = new MunicipioDAO();
 
     public FicharioPessoaF() {
@@ -137,6 +140,13 @@ public class FicharioPessoaF {
             }
 
         }
+        for (Pet pet : e.getPets()) {
+            if (pet.getId() == 0) {
+                pet.setIdF(e.getId());
+                petDAO.incluir(pet);
+            }
+
+        }
 
     }
 
@@ -169,6 +179,9 @@ public class FicharioPessoaF {
         Veiculo[] arr = new Veiculo[veicDAO.listarF(index).size()];
         pessoafisica.setVeiculos(veicDAO.listarF(index).toArray(arr));
 
+        Pet[] arr2 = new Pet[petDAO.listarF(index).size()];
+        pessoafisica.setPets(petDAO.listarF(index).toArray(arr2));
+
         return pessoafisica;
     }
 
@@ -182,6 +195,14 @@ public class FicharioPessoaF {
                 veicDAO.incluir(veic);
             } else {
                 veicDAO.alterar(veic, veic.getId());
+            }
+        }
+        for (Pet pet : pessoafisica.getPets()) {
+            if (pet.getId() == 0) {
+                pet.setIdF(pessoafisica.getId());
+                petDAO.incluir(pet);
+            } else {
+                petDAO.alterar(pet, pet.getId());
             }
         }
     }

@@ -529,7 +529,7 @@ public class AddPessoaJuridica extends javax.swing.JDialog {
     private javax.swing.JTextField jTFQntCarros;
     // End of variables declaration//GEN-END:variables
 
-    PessoaJuridica showDialog() {
+  public PessoaJuridica showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return pessoajuridica;

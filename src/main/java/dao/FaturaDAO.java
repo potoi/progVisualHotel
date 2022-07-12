@@ -157,4 +157,59 @@ public class FaturaDAO {
         return faturas;
     }
 
+    public String[][] listarString() throws Exception {
+        String sql;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String[][] a = new String[tamanho()][6];
+
+        sql = """
+              SELECT cf.nome as nomeF,cj.nome as nomeJ, f.idconta, f.dataliquidacao, f.qtdparcelas,f.tipopagamento FROM faturas f join contas c
+              on f.idconta = c.id
+              left join clientesfisico cf
+              on
+              cf.id = c.idclientefisico
+              left join clientesjuridico cj
+              on
+              cj.id = c.idclientejuridico""";
+        ps = conn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        int i = 0;
+        while (rs.next()) {
+
+            a[i][0] = rs.getString("nomef");
+            a[i][1] = rs.getString("nomej");
+            a[i][2] = rs.getString("idconta");
+            a[i][3] = rs.getString("dataliquidacao");
+            a[i][4] = rs.getString("qtdparcelas");
+            a[i][5] = rs.getString("tipopagamento");
+
+            i++;
+        }
+        rs.close();
+        ps.close();
+
+        return a;
+    }
+
+    public int tamanho() throws Exception {
+        String sql;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        sql = "select count(idconta) as quantidade from faturas";
+        ps = conn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        int a = 0;
+        while (rs.next()) {
+
+            a = rs.getInt("quantidade");
+
+        }
+        rs.close();
+        ps.close();
+
+        return a;
+    }
 }

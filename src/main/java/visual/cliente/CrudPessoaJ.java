@@ -29,7 +29,7 @@ import visual.principal.TelaPrincipal;
  *
  * @author Victor
  */
-public class CrudPessoaJ extends javax.swing.JFrame {
+public class CrudPessoaJ extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtm;
     private FicharioPessoaJ ficharioAtual = new FicharioPessoaJ();
@@ -63,18 +63,9 @@ public class CrudPessoaJ extends javax.swing.JFrame {
         jButtonClienteF = new javax.swing.JButton();
         jButtonMunicipio = new javax.swing.JButton();
         jButtonVeiculo = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuCliente = new javax.swing.JMenuItem();
-        jMenuConta = new javax.swing.JMenuItem();
-        jMenuProdutos = new javax.swing.JMenuItem();
-        jMenuServicos = new javax.swing.JMenuItem();
-        jMenuFaturas = new javax.swing.JMenuItem();
-        jMenuEquipamentos = new javax.swing.JMenuItem();
-        jMenuFuncionarios = new javax.swing.JMenuItem();
-        jMenuTelaPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(742, 476));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable.setModel(dtm);
@@ -144,82 +135,11 @@ public class CrudPessoaJ extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
 
-        jMenu2.setText("Telas");
-
-        jMenuCliente.setText("Cliente");
-        jMenuCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuClienteActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuCliente);
-
-        jMenuConta.setText("Conta");
-        jMenuConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuContaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuConta);
-
-        jMenuProdutos.setText("Produtos");
-        jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuProdutosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuProdutos);
-
-        jMenuServicos.setText("Serviços");
-        jMenuServicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuServicosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuServicos);
-
-        jMenuFaturas.setText("Faturas");
-        jMenuFaturas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFaturasActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuFaturas);
-
-        jMenuEquipamentos.setText("Equipamento");
-        jMenuEquipamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEquipamentosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuEquipamentos);
-
-        jMenuFuncionarios.setText("Funcionário");
-        jMenuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFuncionariosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuFuncionarios);
-
-        jMenuTelaPrincipal.setText("Tela Principal");
-        jMenuTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuTelaPrincipalActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuTelaPrincipal);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        AddPessoaJuridica tela = new AddPessoaJuridica(this, true);
+        AddPessoaJuridica tela = new AddPessoaJuridica(null, true);
         tela.showDialog();
         atualizaTabela();
     }//GEN-LAST:event_jButtonAddActionPerformed
@@ -230,7 +150,7 @@ public class CrudPessoaJ extends javax.swing.JFrame {
                 int id = Integer.parseInt(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
                 PessoaJuridica produtoantes = ficharioAtual.achar(id);
 
-                AddPessoaJuridica tela = new AddPessoaJuridica(this, true, produtoantes);
+                AddPessoaJuridica tela = new AddPessoaJuridica(null, true, produtoantes);
                 PessoaJuridica produtodps = tela.showDialog();
 
                 if (produtodps != null) {
@@ -291,54 +211,6 @@ public class CrudPessoaJ extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonClienteFActionPerformed
 
-    private void jMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClienteActionPerformed
-        CrudPessoaF crud = new CrudPessoaF();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuClienteActionPerformed
-
-    private void jMenuContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContaActionPerformed
-        CrudConta crud = new CrudConta();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuContaActionPerformed
-
-    private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
-        CrudProduto crud = new CrudProduto();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuProdutosActionPerformed
-
-    private void jMenuServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuServicosActionPerformed
-        CrudServico crud = new CrudServico();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuServicosActionPerformed
-
-    private void jMenuFaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturasActionPerformed
-        CrudFatura crud = new CrudFatura();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuFaturasActionPerformed
-
-    private void jMenuEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEquipamentosActionPerformed
-        CrudEquipamento crud = new CrudEquipamento();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuEquipamentosActionPerformed
-
-    private void jMenuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFuncionariosActionPerformed
-        CrudFuncionario crud = new CrudFuncionario();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuFuncionariosActionPerformed
-
-    private void jMenuTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTelaPrincipalActionPerformed
-        TelaPrincipal principal = TelaPrincipal.voltarTelaPrincipal();
-        principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuTelaPrincipalActionPerformed
-
     private void atualizaTabela() {
 
         try {
@@ -370,16 +242,6 @@ public class CrudPessoaJ extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMunicipio;
     private javax.swing.JButton jButtonRemove;
     private javax.swing.JButton jButtonVeiculo;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuCliente;
-    private javax.swing.JMenuItem jMenuConta;
-    private javax.swing.JMenuItem jMenuEquipamentos;
-    private javax.swing.JMenuItem jMenuFaturas;
-    private javax.swing.JMenuItem jMenuFuncionarios;
-    private javax.swing.JMenuItem jMenuProdutos;
-    private javax.swing.JMenuItem jMenuServicos;
-    private javax.swing.JMenuItem jMenuTelaPrincipal;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;

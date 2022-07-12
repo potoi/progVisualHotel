@@ -188,7 +188,7 @@ public class TelaAddEquipamento extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    ArrayList<Equipamento> showDialog() {
+   public ArrayList<Equipamento> showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return arrayE;

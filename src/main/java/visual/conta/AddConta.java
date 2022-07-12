@@ -4,6 +4,7 @@
  */
 package visual.conta;
 
+import controller.FicharioConta;
 import java.awt.Frame;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -34,6 +35,7 @@ public class AddConta extends javax.swing.JDialog {
      * Creates new form CrudAlterConta
      */
     private Conta conta;
+    private FicharioConta fichario = new FicharioConta();
 
     public AddConta(java.awt.Frame parent, boolean modal, Cliente c) {
 
@@ -58,6 +60,7 @@ public class AddConta extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jFTDataA = new javax.swing.JFormattedTextField();
         jFTQuarto = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,6 +94,7 @@ public class AddConta extends javax.swing.JDialog {
             }
         });
 
+        jFTQuarto.setEditable(false);
         jFTQuarto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jFTQuartoFocusGained(evt);
@@ -99,6 +103,13 @@ public class AddConta extends javax.swing.JDialog {
         jFTQuarto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTQuartoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Escolher");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -116,9 +127,12 @@ public class AddConta extends javax.swing.JDialog {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFTQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jFTQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
                             .addComponent(jFTDataA, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +144,8 @@ public class AddConta extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jFTQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(26, 26, 26)
                 .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -225,8 +240,27 @@ public class AddConta extends javax.swing.JDialog {
         jFTQuarto.setCaretPosition(0);
     }//GEN-LAST:event_jFTQuartoFocusGained
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        JComboBox cb;
+        try {
+            cb = new JComboBox(fichario.quartosDisponivel().toArray());
+
+            int input;
+            input = JOptionPane.showConfirmDialog(this, cb,
+                    "Selecione o quarto disponível", JOptionPane.DEFAULT_OPTION);
+            if (input == JOptionPane.OK_OPTION) {
+                String str = (String) cb.getSelectedItem();
+                jFTQuarto.setText(str);
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JFormattedTextField jFTDataA;
     private javax.swing.JFormattedTextField jFTQuarto;
@@ -234,7 +268,7 @@ public class AddConta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
-    Conta showDialog() {
+    public Conta showDialog() {
         this.setVisible(true);
         return conta;
 

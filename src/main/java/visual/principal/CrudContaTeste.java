@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visual.conta;
+package visual.principal;
 
+import visual.conta.*;
 import visual.conta.TelaAddFatura;
 import visual.conta.AddConta;
 import visual.conta.AlterConta;
@@ -33,7 +34,7 @@ import visual.principal.TelaPrincipal;
  *
  * @author Victor
  */
-public class CrudConta extends javax.swing.JFrame {
+public class CrudContaTeste extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtmConta;
     private DefaultTableModel dtmCliente;
@@ -42,7 +43,7 @@ public class CrudConta extends javax.swing.JFrame {
     private FicharioConta ficharioConta = new FicharioConta();
     private boolean isF = true;
 
-    public CrudConta() {
+    public CrudContaTeste() {
 
         dtmConta = new DefaultTableModel(0, 0) {
             @Override
@@ -83,8 +84,19 @@ public class CrudConta extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuCliente = new javax.swing.JMenuItem();
+        jMenuConta = new javax.swing.JMenuItem();
+        jMenuProdutos = new javax.swing.JMenuItem();
+        jMenuServicos = new javax.swing.JMenuItem();
+        jMenuFaturas = new javax.swing.JMenuItem();
+        jMenuEquipamentos = new javax.swing.JMenuItem();
+        jMenuFuncionarios = new javax.swing.JMenuItem();
+        jMenuTelaPrincipal = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableCliente.setModel(dtmCliente       );
@@ -95,7 +107,7 @@ public class CrudConta extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTableCliente);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 290, 240));
-        getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 60, 80));
+        getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 60, 130));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 40, 40));
 
         jButtonAdd.setText("Adicionar Nova Conta");
@@ -172,9 +184,79 @@ public class CrudConta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 120, -1));
+        getContentPane().add(filler5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, -1, 10));
+
+        jMenu2.setText("Telas");
+
+        jMenuCliente.setText("Cliente");
+        jMenuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuCliente);
+
+        jMenuConta.setText("Conta");
+        jMenuConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuContaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuConta);
+
+        jMenuProdutos.setText("Produtos");
+        jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProdutosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuProdutos);
+
+        jMenuServicos.setText("Serviços");
+        jMenuServicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuServicosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuServicos);
+
+        jMenuFaturas.setText("Faturas");
+        jMenuFaturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFaturasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuFaturas);
+
+        jMenuEquipamentos.setText("Equipamento");
+        jMenuEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEquipamentosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuEquipamentos);
+
+        jMenuFuncionarios.setText("Funcionário");
+        jMenuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFuncionariosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuFuncionarios);
+
+        jMenuTelaPrincipal.setText("Tela Principal");
+        jMenuTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuTelaPrincipalActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuTelaPrincipal);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
@@ -187,7 +269,7 @@ public class CrudConta extends javax.swing.JFrame {
                 } else {
                     produtoantes = ficharioJ.achar(id);
                 }
-                AddConta tela = new AddConta(this, true, produtoantes);
+                AddConta tela = new AddConta(null, true, produtoantes);
                 Conta produtodps = tela.showDialog();
                 if (produtodps != null) {
                     produtodps.setCliente(produtoantes);
@@ -197,13 +279,13 @@ public class CrudConta extends javax.swing.JFrame {
                             "Sucesso", JOptionPane.ERROR_MESSAGE, imagem.sucesso());
                     atualizaTabela();
                 } else {
-    
+
                 }
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
                         + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
-                Logger.getLogger(CrudConta.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(CrudContaTeste.class.getName()).log(Level.SEVERE, null, e);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione um elemento na tabela de clientes",
@@ -218,12 +300,12 @@ public class CrudConta extends javax.swing.JFrame {
                 int id = Integer.parseInt(jTableConta.getValueAt(jTableConta.getSelectedRow(), 0).toString());
                 Conta contaantes = ficharioConta.achar(id);
                 if (contaantes.getDataFechamento() == null) {
-                    AlterConta tela = new AlterConta(this, true, contaantes);
+                    AlterConta tela = new AlterConta(null, true, contaantes);
                     Conta contadps = tela.showDialog();
 
                     if (contadps != null) {
                         if (contadps.getDataFechamento() != null) {
-                            TelaAddFatura telaf = new TelaAddFatura(this, true, contadps);
+                            TelaAddFatura telaf = new TelaAddFatura(null, true, contadps);
                             Fatura fatura = telaf.showDialog();
                             if (fatura != null) {
                                 FicharioFatura ficharioFatura = new FicharioFatura();
@@ -255,7 +337,7 @@ public class CrudConta extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
                         + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
-                Logger.getLogger(CrudConta.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(CrudContaTeste.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }//GEN-LAST:event_jButtonAlterActionPerformed
@@ -294,6 +376,54 @@ public class CrudConta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonMCFActionPerformed
 
+    private void jMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClienteActionPerformed
+        CrudPessoaF crud = new CrudPessoaF();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuClienteActionPerformed
+
+    private void jMenuContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContaActionPerformed
+        CrudContaTeste crud = new CrudContaTeste();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuContaActionPerformed
+
+    private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
+        CrudProduto crud = new CrudProduto();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuProdutosActionPerformed
+
+    private void jMenuServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuServicosActionPerformed
+        CrudServico crud = new CrudServico();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuServicosActionPerformed
+
+    private void jMenuFaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturasActionPerformed
+        CrudFatura crud = new CrudFatura();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuFaturasActionPerformed
+
+    private void jMenuEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEquipamentosActionPerformed
+        CrudEquipamento crud = new CrudEquipamento();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuEquipamentosActionPerformed
+
+    private void jMenuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFuncionariosActionPerformed
+        CrudFuncionario crud = new CrudFuncionario();
+        crud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuFuncionariosActionPerformed
+
+    private void jMenuTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTelaPrincipalActionPerformed
+        TelaPrincipal principal = TelaPrincipal.voltarTelaPrincipal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuTelaPrincipalActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Util.fazRelatorio("contaF.jasper");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -303,7 +433,7 @@ public class CrudConta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       Util.fazRelatorio("agenda.jasper");
+        Util.fazRelatorio("agenda.jasper");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void atualizaTabela() {
@@ -322,7 +452,7 @@ public class CrudConta extends javax.swing.JFrame {
 
             }
         } catch (Exception ex) {
-            Logger.getLogger(CrudConta.class
+            Logger.getLogger(CrudContaTeste.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -343,7 +473,7 @@ public class CrudConta extends javax.swing.JFrame {
 
             }
         } catch (Exception ex) {
-            Logger.getLogger(CrudConta.class
+            Logger.getLogger(CrudContaTeste.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -363,7 +493,7 @@ public class CrudConta extends javax.swing.JFrame {
 
             }
         } catch (Exception ex) {
-            Logger.getLogger(CrudConta.class
+            Logger.getLogger(CrudContaTeste.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -374,6 +504,7 @@ public class CrudConta extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -382,6 +513,16 @@ public class CrudConta extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMCF;
     private javax.swing.JButton jButtonMCJ;
     private javax.swing.JButton jButtonRemove;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuCliente;
+    private javax.swing.JMenuItem jMenuConta;
+    private javax.swing.JMenuItem jMenuEquipamentos;
+    private javax.swing.JMenuItem jMenuFaturas;
+    private javax.swing.JMenuItem jMenuFuncionarios;
+    private javax.swing.JMenuItem jMenuProdutos;
+    private javax.swing.JMenuItem jMenuServicos;
+    private javax.swing.JMenuItem jMenuTelaPrincipal;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableCliente;

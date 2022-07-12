@@ -218,7 +218,7 @@ public class AddFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 
-    Funcionario showDialog() {
+   public Funcionario showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return funcionario;

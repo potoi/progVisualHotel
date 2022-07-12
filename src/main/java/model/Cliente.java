@@ -9,18 +9,27 @@ package model;
  * @author Victor
  */
 public abstract class Cliente {
-    
+
     private int id;
     private String nome;
     private Endereco enderecoResidencial;
     private Endereco enderecoComercial;
     private Veiculo veiculos[];
+    private Pet pets[];
     private String telefoneFixo;
     private String telefoneCelular;
     private String telefoneComercial;
-    
+
     public int getId() {
         return id;
+    }
+
+    public Pet[] getPets() {
+        return pets;
+    }
+
+    public void setPets(Pet[] pets) {
+        this.pets = pets;
     }
 
     public void setId(int id) {
@@ -93,9 +102,9 @@ public abstract class Cliente {
         this.telefoneCelular = telefoneCelular;
         this.telefoneComercial = telefoneComercial;
     }
-    public Cliente(){
-        
+
+    public Cliente() {
+
     }
-    
-    
+
 }

@@ -318,7 +318,7 @@ public class AddProduto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
-    Produto showDialog() {
+   public Produto showDialog() {
         this.setVisible(true);
         return produto;
 

@@ -6,7 +6,6 @@ package controller;
 
 import dao.FaturaDAO;
 import java.util.ArrayList;
-import model.Item;
 import model.Fatura;
 import model.Parcela;
 
@@ -55,9 +54,10 @@ public class FicharioFatura {
         dao.apagar(i);
     }
 
+
+
     public void add(Fatura e) throws Exception {
         dao.incluir(e);
-        FicharioParcela ficharioP = new FicharioParcela();
         for (Parcela p : e.getParcelas()) {
             ficharioP.add(p);
         }
@@ -75,8 +75,9 @@ public class FicharioFatura {
 
     public void alterar(Fatura fatura, int id) throws Exception {
         dao.alterar(fatura, id);
+        ficharioP.removeIdFatura(id);
         for (Parcela p : fatura.getParcelas()) {
-            ficharioP.alterar(p, p.getIdentificador());
+            ficharioP.add(p);
         }
 
     }

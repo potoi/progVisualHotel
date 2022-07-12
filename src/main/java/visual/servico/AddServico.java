@@ -330,7 +330,7 @@ public class AddServico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 
-    Servico showDialog() {
+   public Servico showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return servico;

@@ -188,7 +188,7 @@ public class TelaAddFuncionario extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    ArrayList<Funcionario> showDialog() {
+   public ArrayList<Funcionario> showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return arrayE;

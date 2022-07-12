@@ -187,7 +187,7 @@ public class TelaAddProduto extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    ArrayList<Produto> showDialog() {
+    public ArrayList<Produto> showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return arrayI;

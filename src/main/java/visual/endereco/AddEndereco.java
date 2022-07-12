@@ -302,7 +302,7 @@ public class AddEndereco extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
-    Endereco showDialog() {
+   public Endereco showDialog() {
         this.setVisible(true);
         if (check == 1) {
             return endereco;

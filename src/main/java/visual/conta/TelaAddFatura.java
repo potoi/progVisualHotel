@@ -226,7 +226,7 @@ public class TelaAddFatura extends javax.swing.JDialog {
             JOptionPane.showConfirmDialog(null, "Selecione o método de pagamento", "Pagamento não encontrado", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_jButton5ActionPerformed
     
-    Fatura showDialog() {
+    public Fatura showDialog() {
         setVisible(true);
         return fatura;
     }
