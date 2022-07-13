@@ -4,25 +4,14 @@
  */
 package visual.cliente;
 
-import visual.endereco.CrudEndereco;
-import visual.conta.CrudConta;
 import controller.FicharioPessoaF;
-import java.awt.Color;
 import model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DropMode;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import recursos.ImagemFichario;
-import visual.equipamento.CrudEquipamento;
-import visual.fatura.CrudFatura;
-import visual.funcionario.CrudFuncionario;
-import visual.municipio.CrudMunicipio;
-import visual.produto.CrudProduto;
-import visual.servico.CrudServico;
-import visual.principal.TelaPrincipal;
 
 /**
  *
@@ -53,15 +42,10 @@ public class CrudPessoaF extends javax.swing.JInternalFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jButtonAdd = new javax.swing.JButton();
         jButtonAlter = new javax.swing.JButton();
         jButtonRemove = new javax.swing.JButton();
-        jButtonEndereco = new javax.swing.JButton();
-        jButtonMunicipio = new javax.swing.JButton();
-        jButtonVeiculo = new javax.swing.JButton();
-        jButtonClienteF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(742, 476));
@@ -75,7 +59,6 @@ public class CrudPessoaF extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTable);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 620, 240));
-        getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 60, 80));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 40, 40));
 
         jButtonAdd.setText("Adicionar");
@@ -101,38 +84,6 @@ public class CrudPessoaF extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButtonRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
-
-        jButtonEndereco.setText("Tela Endereço");
-        jButtonEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEnderecoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
-
-        jButtonMunicipio.setText("Tela Municipio");
-        jButtonMunicipio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMunicipioActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
-
-        jButtonVeiculo.setText("Tela Veículo");
-        jButtonVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVeiculoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
-
-        jButtonClienteF.setText("Tela Cliente Jurídico");
-        jButtonClienteF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClienteFActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonClienteF, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,6 +114,7 @@ public class CrudPessoaF extends javax.swing.JInternalFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "Erro, motivo: "
                         + e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                Logger.getLogger(CrudPessoaF.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }//GEN-LAST:event_jButtonAlterActionPerformed
@@ -186,30 +138,6 @@ public class CrudPessoaF extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
-    private void jButtonEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnderecoActionPerformed
-        CrudEndereco crud = new CrudEndereco();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonEnderecoActionPerformed
-
-    private void jButtonVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoActionPerformed
-        CrudVeiculo crud = new CrudVeiculo();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonVeiculoActionPerformed
-
-    private void jButtonMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMunicipioActionPerformed
-        CrudMunicipio crud = new CrudMunicipio();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonMunicipioActionPerformed
-
-    private void jButtonClienteFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteFActionPerformed
-        CrudPessoaJ crud = new CrudPessoaJ();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonClienteFActionPerformed
-
     private void atualizaTabela() {
 
         try {
@@ -232,15 +160,10 @@ public class CrudPessoaF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonAlter;
-    private javax.swing.JButton jButtonClienteF;
-    private javax.swing.JButton jButtonEndereco;
-    private javax.swing.JButton jButtonMunicipio;
     private javax.swing.JButton jButtonRemove;
-    private javax.swing.JButton jButtonVeiculo;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;

@@ -28,7 +28,7 @@ import visual.funcionario.CrudFuncionario;
 import visual.cliente.CrudPessoaF;
 import visual.produto.CrudProduto;
 import visual.servico.CrudServico;
-import visual.principal.TelaPrincipal;
+import visual.principal.TelaPrincipalAntiga;
 
 /**
  *
@@ -419,7 +419,7 @@ public class CrudContaTeste extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuFuncionariosActionPerformed
 
     private void jMenuTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTelaPrincipalActionPerformed
-        TelaPrincipal principal = TelaPrincipal.voltarTelaPrincipal();
+        TelaPrincipalAntiga principal = TelaPrincipalAntiga.voltarTelaPrincipal();
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuTelaPrincipalActionPerformed

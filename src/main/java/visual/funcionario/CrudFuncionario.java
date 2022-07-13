@@ -23,7 +23,7 @@ import recursos.ImagemFichario;
 import visual.fatura.CrudFatura;
 import visual.produto.CrudProduto;
 import visual.servico.CrudServico;
-import visual.principal.TelaPrincipal;
+import visual.principal.TelaPrincipalAntiga;
 
 /**
  *

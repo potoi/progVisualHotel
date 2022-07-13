@@ -123,7 +123,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
                 if (user.getSenha().equals(fichario.toHash(senha1))) {
 
-                    TelaPrincipal principal = TelaPrincipal.voltarTelaPrincipal(user.getLogin());
+                    TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
                     this.dispose();
 

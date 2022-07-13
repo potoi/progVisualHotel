@@ -148,7 +148,7 @@ public class PetDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        sql = "SELECT id, animal,descricao idPessoaF,idPessoaJ FROM pets  WHERE idpessoaF = ?";
+        sql = "SELECT id, animal,descricao ,idPessoaF,idPessoaJ FROM pets  WHERE idpessoaF = ?";
         ps = conn.prepareStatement(sql);
         ps.setInt(1, idF);
         rs = ps.executeQuery();

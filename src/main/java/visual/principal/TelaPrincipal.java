@@ -4,22 +4,28 @@
  */
 package visual.principal;
 
-import visual.servico.CrudServico;
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JInternalFrame;
+import javax.swing.JMenu;
+import javax.swing.JTextField;
+import javax.swing.MenuElement;
+import model.Cliente;
+import model.Conta;
+import visual.cliente.CrudPessoaF;
+import visual.cliente.CrudPessoaJ;
+import visual.cliente.CrudPet;
+import visual.cliente.CrudVeiculo;
+import visual.conta.AlterConta;
+import visual.conta.CrudConta;
+import visual.endereco.CrudEndereco;
+import visual.equipamento.CrudEquipamento;
 import visual.fatura.CrudFatura;
 import visual.funcionario.CrudFuncionario;
-import visual.equipamento.CrudEquipamento;
-import visual.cliente.CrudPessoaF;
-import visual.conta.CrudConta;
-import dao.ProdutoDAO;
-import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import model.Produto;
-import recursos.ImagemFichario;
+import visual.municipio.CrudMunicipio;
 import visual.produto.CrudProduto;
+import visual.servico.CrudServico;
 
 /**
  *
@@ -28,31 +34,12 @@ import visual.produto.CrudProduto;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaPrincipal
+     * Creates new form NewJFrame
      */
-    private static TelaPrincipal instance;
-
-    private TelaPrincipal(String nome) {
+    public TelaPrincipal() {
         initComponents();
-        jLabel1.setText("Bem vindo "+nome);
-    }
-
-    private TelaPrincipal() {
-        initComponents();
-    }
-
-    public static TelaPrincipal voltarTelaPrincipal(String nome) {
-        if (instance == null) {
-            instance = new TelaPrincipal(nome);
-        }
-        return instance;
-    }
-
-    public static TelaPrincipal voltarTelaPrincipal() {
-        if (instance == null) {
-            instance = new TelaPrincipal();
-        }
-        return instance;
+        fechaTelas();
+        this.setTitle("Tela Principal");
     }
 
     /**
@@ -64,162 +51,307 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jDP = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuCliente = new javax.swing.JMenuItem();
-        jMenuConta = new javax.swing.JMenuItem();
-        jMenuProdutos = new javax.swing.JMenuItem();
-        jMenuServicos = new javax.swing.JMenuItem();
-        jMenuFaturas = new javax.swing.JMenuItem();
-        jMenuEquipamentos = new javax.swing.JMenuItem();
-        jMenuFuncionarios = new javax.swing.JMenuItem();
-        jMenuTelaPrincipal = new javax.swing.JMenuItem();
+        jMenuConta = new javax.swing.JMenu();
+        jCheckBoxMenuItemContas = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemFaturas = new javax.swing.JCheckBoxMenuItem();
+        jMenuEmpresa = new javax.swing.JMenu();
+        jCheckBoxMenuItemProdutos = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemServicos = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemFuncionarios = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemEquipamentos = new javax.swing.JCheckBoxMenuItem();
+        jMenuCliente = new javax.swing.JMenu();
+        jCheckBoxMenuItemClientesF = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemClientesJ = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemEnderecos = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemMunicipios = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemVeiculos = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItemPets = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel1.setText("Bem Vindo asd");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 340, 70));
-
-        jMenu2.setText("Telas");
-
-        jMenuCliente.setText("Cliente");
-        jMenuCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuClienteActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuCliente);
+        javax.swing.GroupLayout jDPLayout = new javax.swing.GroupLayout(jDP);
+        jDP.setLayout(jDPLayout);
+        jDPLayout.setHorizontalGroup(
+            jDPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 803, Short.MAX_VALUE)
+        );
+        jDPLayout.setVerticalGroup(
+            jDPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 519, Short.MAX_VALUE)
+        );
 
         jMenuConta.setText("Conta");
-        jMenuConta.addActionListener(new java.awt.event.ActionListener() {
+
+        jCheckBoxMenuItemContas.setText("Contas");
+        jCheckBoxMenuItemContas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuContaActionPerformed(evt);
+                jCheckBoxMenuItemContasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuConta);
+        jMenuConta.add(jCheckBoxMenuItemContas);
 
-        jMenuProdutos.setText("Produtos");
-        jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMenuItemFaturas.setSelected(true);
+        jCheckBoxMenuItemFaturas.setText("Faturas");
+        jCheckBoxMenuItemFaturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuProdutosActionPerformed(evt);
+                jCheckBoxMenuItemFaturasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuProdutos);
+        jMenuConta.add(jCheckBoxMenuItemFaturas);
 
-        jMenuServicos.setText("Serviços");
-        jMenuServicos.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(jMenuConta);
+
+        jMenuEmpresa.setText("Empresa");
+
+        jCheckBoxMenuItemProdutos.setSelected(true);
+        jCheckBoxMenuItemProdutos.setText("Produtos");
+        jCheckBoxMenuItemProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuServicosActionPerformed(evt);
+                jCheckBoxMenuItemProdutosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuServicos);
+        jMenuEmpresa.add(jCheckBoxMenuItemProdutos);
 
-        jMenuFaturas.setText("Faturas");
-        jMenuFaturas.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMenuItemServicos.setSelected(true);
+        jCheckBoxMenuItemServicos.setText("Serviços");
+        jCheckBoxMenuItemServicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFaturasActionPerformed(evt);
+                jCheckBoxMenuItemServicosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuFaturas);
+        jMenuEmpresa.add(jCheckBoxMenuItemServicos);
 
-        jMenuEquipamentos.setText("Equipamento");
-        jMenuEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMenuItemFuncionarios.setSelected(true);
+        jCheckBoxMenuItemFuncionarios.setText("Funcionários");
+        jCheckBoxMenuItemFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEquipamentosActionPerformed(evt);
+                jCheckBoxMenuItemFuncionariosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuEquipamentos);
+        jMenuEmpresa.add(jCheckBoxMenuItemFuncionarios);
 
-        jMenuFuncionarios.setText("Funcionário");
-        jMenuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMenuItemEquipamentos.setSelected(true);
+        jCheckBoxMenuItemEquipamentos.setText("Equipamentos");
+        jCheckBoxMenuItemEquipamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFuncionariosActionPerformed(evt);
+                jCheckBoxMenuItemEquipamentosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuFuncionarios);
+        jMenuEmpresa.add(jCheckBoxMenuItemEquipamentos);
 
-        jMenuTelaPrincipal.setText("Tela Principal");
-        jMenuTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(jMenuEmpresa);
+
+        jMenuCliente.setText("Cliente");
+
+        jCheckBoxMenuItemClientesF.setSelected(true);
+        jCheckBoxMenuItemClientesF.setText("Cliente Físico");
+        jCheckBoxMenuItemClientesF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuTelaPrincipalActionPerformed(evt);
+                jCheckBoxMenuItemClientesFActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuTelaPrincipal);
+        jMenuCliente.add(jCheckBoxMenuItemClientesF);
 
-        jMenuBar1.add(jMenu2);
+        jCheckBoxMenuItemClientesJ.setSelected(true);
+        jCheckBoxMenuItemClientesJ.setText("Cliente Jurídico");
+        jCheckBoxMenuItemClientesJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItemClientesJActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jCheckBoxMenuItemClientesJ);
+
+        jCheckBoxMenuItemEnderecos.setSelected(true);
+        jCheckBoxMenuItemEnderecos.setText("Endereços");
+        jCheckBoxMenuItemEnderecos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItemEnderecosActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jCheckBoxMenuItemEnderecos);
+
+        jCheckBoxMenuItemMunicipios.setSelected(true);
+        jCheckBoxMenuItemMunicipios.setText("Municípios");
+        jCheckBoxMenuItemMunicipios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItemMunicipiosActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jCheckBoxMenuItemMunicipios);
+
+        jCheckBoxMenuItemVeiculos.setSelected(true);
+        jCheckBoxMenuItemVeiculos.setText("Veículos");
+        jCheckBoxMenuItemVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItemVeiculosActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jCheckBoxMenuItemVeiculos);
+
+        jCheckBoxMenuItemPets.setSelected(true);
+        jCheckBoxMenuItemPets.setText("Pets");
+        jCheckBoxMenuItemPets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItemPetsActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jCheckBoxMenuItemPets);
+
+        jMenuBar1.add(jMenuCliente);
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(625, 349));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClienteActionPerformed
-        CrudPessoaF crud = new CrudPessoaF();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuClienteActionPerformed
+    private void jCheckBoxMenuItemProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemProdutosActionPerformed
+        addCentered(new CrudProduto());
+    }//GEN-LAST:event_jCheckBoxMenuItemProdutosActionPerformed
 
-    private void jMenuContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContaActionPerformed
-        CrudConta crud = new CrudConta();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuContaActionPerformed
+    private void jCheckBoxMenuItemContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemContasActionPerformed
+        addCentered(new CrudContaTeste());
+    }//GEN-LAST:event_jCheckBoxMenuItemContasActionPerformed
 
-    private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
-        CrudProduto crud = new CrudProduto();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuProdutosActionPerformed
+    private void jCheckBoxMenuItemClientesFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemClientesFActionPerformed
+        addCentered(new CrudPessoaF());
+    }//GEN-LAST:event_jCheckBoxMenuItemClientesFActionPerformed
 
-    private void jMenuServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuServicosActionPerformed
-        CrudServico crud = new CrudServico();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuServicosActionPerformed
+    private void jCheckBoxMenuItemFaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemFaturasActionPerformed
+        addCentered(new CrudFatura());
+    }//GEN-LAST:event_jCheckBoxMenuItemFaturasActionPerformed
 
-    private void jMenuFaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturasActionPerformed
-        CrudFatura crud = new CrudFatura();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuFaturasActionPerformed
+    private void jCheckBoxMenuItemServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemServicosActionPerformed
+        addCentered(new CrudServico());
+    }//GEN-LAST:event_jCheckBoxMenuItemServicosActionPerformed
 
-    private void jMenuEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEquipamentosActionPerformed
-        CrudEquipamento crud = new CrudEquipamento();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuEquipamentosActionPerformed
+    private void jCheckBoxMenuItemFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemFuncionariosActionPerformed
+        addCentered(new CrudFuncionario());
+    }//GEN-LAST:event_jCheckBoxMenuItemFuncionariosActionPerformed
 
-    private void jMenuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFuncionariosActionPerformed
-        CrudFuncionario crud = new CrudFuncionario();
-        crud.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuFuncionariosActionPerformed
+    private void jCheckBoxMenuItemEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemEquipamentosActionPerformed
+        addCentered(new CrudEquipamento());
+    }//GEN-LAST:event_jCheckBoxMenuItemEquipamentosActionPerformed
 
-    private void jMenuTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTelaPrincipalActionPerformed
-        TelaPrincipal principal = TelaPrincipal.voltarTelaPrincipal();
-        principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuTelaPrincipalActionPerformed
+    private void jCheckBoxMenuItemClientesJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemClientesJActionPerformed
+        addCentered(new CrudPessoaJ());
+    }//GEN-LAST:event_jCheckBoxMenuItemClientesJActionPerformed
+
+    private void jCheckBoxMenuItemEnderecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemEnderecosActionPerformed
+        addCentered(new CrudEndereco());
+    }//GEN-LAST:event_jCheckBoxMenuItemEnderecosActionPerformed
+
+    private void jCheckBoxMenuItemMunicipiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemMunicipiosActionPerformed
+        addCentered(new CrudMunicipio());
+    }//GEN-LAST:event_jCheckBoxMenuItemMunicipiosActionPerformed
+
+    private void jCheckBoxMenuItemVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemVeiculosActionPerformed
+        addCentered(new CrudVeiculo());
+    }//GEN-LAST:event_jCheckBoxMenuItemVeiculosActionPerformed
+
+    private void jCheckBoxMenuItemPetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemPetsActionPerformed
+        addCentered(new CrudPet());
+    }//GEN-LAST:event_jCheckBoxMenuItemPetsActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaPrincipal().setVisible(true);
+            }
+        });
+    }
+
+    public void addCentered(JInternalFrame jif) {
+        fechaTelas();
+        jDP.add(jif);
+        jif.setLocation((jDP.getWidth() - jif.getWidth()) / 2, (jDP.getHeight() - jif.getHeight()) / 2);
+        jif.setVisible(true);
+    }
+
+    private void fechaTelas() {
+        if (jDP.getComponents().length > 0) {
+            jDP.removeAll();
+            jDP.repaint();
+        }
+
+        for (MenuElement x : jMenuBar1.getSubElements()) {
+            if (x instanceof JMenu m) {
+
+                for (Component d : m.getMenuComponents()) {
+                    if (d instanceof JCheckBoxMenuItem f) {
+                        f.setSelected(false);
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemClientesF;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemClientesJ;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemContas;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemEnderecos;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemEquipamentos;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemFaturas;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemFuncionarios;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemMunicipios;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemPets;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemProdutos;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemServicos;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemVeiculos;
+    private javax.swing.JDesktopPane jDP;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuCliente;
-    private javax.swing.JMenuItem jMenuConta;
-    private javax.swing.JMenuItem jMenuEquipamentos;
-    private javax.swing.JMenuItem jMenuFaturas;
-    private javax.swing.JMenuItem jMenuFuncionarios;
-    private javax.swing.JMenuItem jMenuProdutos;
-    private javax.swing.JMenuItem jMenuServicos;
-    private javax.swing.JMenuItem jMenuTelaPrincipal;
+    private javax.swing.JMenu jMenuCliente;
+    private javax.swing.JMenu jMenuConta;
+    private javax.swing.JMenu jMenuEmpresa;
     // End of variables declaration//GEN-END:variables
 }

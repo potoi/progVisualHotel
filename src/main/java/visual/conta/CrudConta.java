@@ -27,7 +27,7 @@ import visual.funcionario.CrudFuncionario;
 import visual.cliente.CrudPessoaF;
 import visual.produto.CrudProduto;
 import visual.servico.CrudServico;
-import visual.principal.TelaPrincipal;
+import visual.principal.TelaPrincipalAntiga;
 
 /**
  *
